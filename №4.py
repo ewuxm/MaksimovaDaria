@@ -13,7 +13,7 @@ def students_info(grades, school):
     return result
 grades = {
     "Алиса": [85, 90, 78],
-    "Никита": [92, 88, 94], 
+    "Никита": [92, 89, 94], 
     "Иван": [70, 65, 72]
     }
 school = {
@@ -22,4 +22,5 @@ school = {
     }
 result = students_info(grades, school)
 for line in result:
+
     print(line)
