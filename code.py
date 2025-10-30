@@ -213,3 +213,46 @@ else:
 
 
 // Элемент 13 найден на позиции 6
+
+
+// Тернарный поиск
+def ternary_search(arr, key):
+    """
+    Тернарный поиск в отсортированном массиве.
+    Возвращает индекс элемента или -1, если элемент не найден.
+    """
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        # Рассчитываем две точки разделения
+        third1 = low + (high - low) // 3
+        third2 = high - (high - low) // 3
+
+        # Проверяем средние точки
+        if arr[third1] == key:
+            return third1
+        elif arr[third2] == key:
+            return third2
+        elif key < arr[third1]:  # Искать в первой трети
+            high = third1 - 1
+        elif key > arr[third2]:  # Искать в третьей трети
+            low = third2 + 1
+        else:                    # Искать во второй трети
+            low = third1 + 1
+            high = third2 - 1
+
+    return -1  # Элемент не найден
+
+# Пример использования
+arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
+key = 13
+
+result = ternary_search(arr, key)
+if result != -1:
+    print(f"Элемент {key} найден на позиции {result}")
+else:
+    print(f"Элемент {key} не найден в массиве")
+
+
+// Элемент 13 найден на позиции 6
