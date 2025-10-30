@@ -79,3 +79,49 @@ print("Отсортированный массив:", sorted_arr)
 
 // Исходный массив: [3, 6, 2, 4, 5, 1]
 // Отсортированный массив: [1, 2, 3, 4, 5, 6]
+
+
+
+// Сортировка бусинами (гравитационная)
+import numpy as np
+
+def bead_sort(arr):
+    """
+    Реализует сортировку бусинками (gravity sort).
+    Вход: список целых положительных чисел
+    Выход: отсортированный список
+    """
+    # Шаг 1: Создаем матрицу N x M, где строки соответствуют числам списка
+    rows = len(arr)
+    cols = max(arr)
+    beads_matrix = np.zeros((rows, cols), dtype=int)
+
+    # Заполняем матрицу "бусинками": первая строка имеет столько единиц, сколько первое число и т.п.
+    for row in range(rows):
+        beads_matrix[row, :arr[row]] = 1
+
+    # Шаг 2: Применяем силу тяжести - каждый столбец опускается вниз
+    for col in range(cols):
+        column_sum = sum(beads_matrix[:,col])
+        beads_matrix[:,col] = np.concatenate([np.ones(column_sum), np.zeros(rows-column_sum)])
+
+    # Шаг 3: Преобразуем обратно в исходный вид
+    result = []
+    for row in range(rows):
+        count = sum(beads_matrix[row,:])  # количество единичек соответствует числу
+        result.append(count)
+
+    return result
+
+
+if __name__ == "__main__":
+    input_list = [5, 3, 1, 8, 2, 7]
+    print(f'Исходный массив: {input_list}')
+    sorted_list = bead_sort(input_list)
+    print(f'Отсортированный массив: {sorted_list}')
+
+// Исходный массив: [5, 3, 1, 8, 2, 7]
+// Отсортированный массив: [1, 2, 3, 5, 7, 8]
+
+
+//
