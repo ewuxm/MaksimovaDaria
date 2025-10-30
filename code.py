@@ -124,4 +124,48 @@ if __name__ == "__main__":
 // Отсортированный массив: [1, 2, 3, 5, 7, 8]
 
 
+// Поиск скачками
+import math
+
+def jump_search(arr, target):
+    """
+    Выполняет поиск скачками (jump search) в отсортированном массиве.
+    Возвращает индекс найденного элемента или -1, если элемент отсутствует.
+    """
+    length = len(arr)
+    step = int(math.sqrt(length))  # Размер скачка
+    prev = 0                       # Текущая позиция
+
+    # Поиск подходящего блока, где элемент может находиться
+    while arr[min(step, length)-1] < target:
+        prev = step                # Переходим к следующему блоку
+        step += int(math.sqrt(length))
+        if prev >= length:         # Проверка выхода за пределы массива
+            return -1
+
+    # Линейный поиск внутри выбранного блока
+    while arr[prev] < target:
+        prev += 1                  # Двигаемся вперёд по одному элементу
+        if prev == min(step, length):
+            return -1              # Вышли за границы текущего блока
+
+    # Нашли нужный элемент
+    if arr[prev] == target:
+        return prev
+    else:
+        return -1
+
+# Пример использования
+array = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
+target_value = 13
+
+result = jump_search(array, target_value)
+if result != -1:
+    print(f"Элемент {target_value} найден на позиции {result}.")
+else:
+    print(f"Элемент {target_value} не найден.")
+
+// Элемент 13 найден на позиции 6.
+
+
 //
