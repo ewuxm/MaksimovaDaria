@@ -168,4 +168,48 @@ else:
 // Элемент 13 найден на позиции 6.
 
 
-//
+// Экспоненциальный поиск
+def binary_search(arr, left, right, target):
+    """
+    Стандартный бинарный поиск в пределах левого и правого индексов.
+    """
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid  # Элемент найден
+        elif arr[mid] < target:
+            left = mid + 1  # Продолжаем справа
+        else:
+            right = mid - 1  # Продолжаем слева
+    return -1  # Элемент не найден
+
+def exponential_search(arr, target):
+    """
+    Экспоненциальный поиск элемента в отсортированном массиве.
+    Возвращает индекс элемента или -1, если элемент не найден.
+    """
+    if not arr or arr[0] > target or arr[-1] < target:
+        return -1  # Массив пуст или целевой элемент вне границ массива
+
+    # Первый этап: определяем подходящий диапазон
+    bound = 1
+    while bound < len(arr) and arr[bound] < target:
+        bound *= 2  # Экспоненциально увеличиваем границу
+
+    # Теперь выполняем бинарный поиск в найденном диапазоне
+    left = bound // 2
+    right = min(bound, len(arr) - 1)
+    return binary_search(arr, left, right, target)
+
+# Пример использования
+data = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
+search_target = 13
+
+index = exponential_search(data, search_target)
+if index != -1:
+    print(f"Элемент {search_target} найден на позиции {index}")
+else:
+    print(f"Элемент {search_target} не найден в массиве")
+
+
+// Элемент 13 найден на позиции 6
