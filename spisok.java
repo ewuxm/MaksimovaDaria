@@ -1,18 +1,16 @@
 import java.util.LinkedList;
 import java.util.Collections;
-
 public class Main {
     public static void main(String[] args) {
         LinkedList<Integer> myList = new LinkedList<>();
         // Добавляем элементы в список
-        myList.add(64);
-        myList.add(34);
-        myList.add(25);
-        myList.add(12);
-        myList.add(22);
-        myList.add(11);
-        myList.add(90);
-        
+        myList.add(13);
+        myList.add(23);
+        myList.add(27);
+        myList.add(75);
+        myList.add(33);
+        myList.add(14);
+        myList.add(60);
         System.out.print("Исходный список: ");
         for (int num : myList) {
             System.out.print(num + " ");
